@@ -1,6 +1,9 @@
 package models.dto;
 
+import models.enums.GenreEnum;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class MainMovieDTO {
     private Long id;
@@ -8,13 +11,23 @@ public class MainMovieDTO {
     private String title;
     private Double rating;
     private LocalDate releaseDate;
+    private List<GenreEnum> genres;
 
-    public MainMovieDTO(Long id, String coverUrl, String title, Double rating, LocalDate releaseDate) {
+    public MainMovieDTO(Long id, String coverUrl, String title, Double rating, LocalDate releaseDate, List<GenreEnum> genres) {
         this.id = id;
         this.coverUrl = coverUrl;
         this.title = title;
         this.rating = rating;
         this.releaseDate = releaseDate;
+        this.genres = genres;
+    }
+
+    public List<GenreEnum> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<GenreEnum> genres) {
+        this.genres = genres;
     }
 
     public MainMovieDTO() {

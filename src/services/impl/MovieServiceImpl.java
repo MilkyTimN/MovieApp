@@ -1,7 +1,9 @@
 package services.impl;
 
+import exceptions.EntityNotFoundException;
 import models.dto.MainMovieDTO;
 import models.entity.Movie;
+import models.enums.GenreEnum;
 import repository.MovieRepository;
 import services.MovieService;
 
@@ -26,6 +28,7 @@ public class MovieServiceImpl implements MovieService {
             item.setRating(movie.getRating());
             item.setTitle(movie.getTitle());
             item.setReleaseDate(movie.getReleaseDate());
+            item.setGenres(movie.getGenres());
 
             response.add(item);
         }
@@ -40,5 +43,30 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void save(Movie movie) {
         repository.save(movie);
+    }
+
+    @Override
+    public Movie getById(Long id) {
+        try {
+            return repository.findById(id);
+        } catch (EntityNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<MainMovieDTO> getMoviesByGenre(GenreEnum genre) {
+        List<MainMovieDTO> listFromDB = getAllMainPage();
+
+        List<MainMovieDTO> responseList = new ArrayList<>();
+
+        for (MainMovieDTO item : listFromDB) {
+            if (item.getGenres().contains(genre)) {
+                responseList.add(item);
+            }
+        }
+        return responseList;
     }
 }

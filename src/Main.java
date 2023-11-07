@@ -1,3 +1,4 @@
+import controllers.MovieController;
 import models.entity.Movie;
 import models.enums.CountryEnum;
 import models.enums.GenreEnum;
@@ -21,6 +22,8 @@ public class Main {
 
         List<GenreEnum> genres = new ArrayList<>();
         genres.add(GenreEnum.ACTION);
+        List<GenreEnum> genres2 = new ArrayList<>();
+        genres.add(GenreEnum.DRAMA);
 
         List<VoiceActingEnum> voice = new ArrayList<>();
         voice.add(VoiceActingEnum.ORIGINAL);
@@ -52,7 +55,7 @@ public class Main {
                 "OOOOOOO",
                 LocalDate.of(2023, 01, 01),
                 countryEnums,
-                genres,
+                genres2,
                 "3:00",
                 voice,
                 null,
@@ -62,13 +65,12 @@ public class Main {
                 "url"
         );
 
-        MovieService service = new MovieServiceImpl();
-        service.save(movie);
-        service.save(movie1);
+        MovieController controller = new MovieController();
+        controller.save(movie);
+        controller.save(movie1);
 
-        System.out.println(service.getAll());
-
-        System.out.println(service.getAllMainPage());
+        System.out.println(controller.getAllMainPage());
+        System.out.println(controller.getMoviesByGenre(GenreEnum.ACTION));
 
 
     }
