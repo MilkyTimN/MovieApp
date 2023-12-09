@@ -27,7 +27,6 @@ public class MovieController {
     public Movie getById(Long id) {
         return service.getById(id);
     }
-
     public List<MainMovieDTO> getMoviesByGenre(GenreEnum genre){
         return service.getMoviesByGenre(genre);
     }
